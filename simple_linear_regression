@@ -1,7 +1,7 @@
 #simple_linear_regression
 #x=input_feature,y=output
 #w0,w1=intercept,slope
-#parameters w0,w1 should passed in array for matrix_mulpticication 
+#parameters w0,w1 should pass in array for matrix_mulpticication 
 
 def simple_linear_regression(x,y):
     covariance = np.sum((x-np.mean(x))*(y-np.mean(y)))/(len(x)-1)
