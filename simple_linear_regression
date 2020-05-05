@@ -1,0 +1,42 @@
+#simple_linear_regression
+def simple_linear_regression(x,y):
+    covariance = np.sum((x-np.mean(x))*(y-np.mean(y)))/(len(x)-1)
+    variance=np.sum((x-np.mean(x))**2)/(len(x)-1)
+    w1=covariance/variance
+    w0=np.mean(y)-(w1*np.mean(x))
+    params=np.array([w0,w1])
+    y_pred=np.dot(params,np.array([1,x]))
+    plt.figure()
+    plt.scatter(x,output,c="r");plt.plot(x,y_pred)
+    return y_pred
+    
+#cost_function
+def cost_function(x,y):
+    covariance = np.sum((x-np.mean(x))*(y-np.mean(y)))/(len(x)-1)
+    variance=np.sum((x-np.mean(x))**2)/(len(x)-1)
+    w1=covariance/variance
+    w0=np.mean(y)-(w1*np.mean(x))
+    params=np.array([w0,w1])
+    y_pred=np.dot(params,np.array([1,x]))
+    cost_function =sum((y_pred-y)**2)/(len(x)*2)
+    return cost_function
+    
+#gradient_descent
+def gradient_descent(x,y,params,alpha,iteration):
+    itera = 0
+    m=len(x)
+    cost_update=np.zeros([iteration])
+    params_update=np.zeros([2,iteration])
+    while itera<iteration:
+        gradient_store=np.zeros([2,m])
+        for i in range(m):
+            y_pred=np.dot(params,np.array([1.0,x]))
+            cost_function = np.sum((y_pred-y)**2)/(m*2)
+            cost_update[itera] = cost_function
+            gradient=np.array([1.0,x[i]])*(y[i]-y_pred[i])
+            gradient_store[:,i]=gradient
+            params=params+((alpha*(gradient)/m))
+            params_update[:,itera]=(params)
+        itera=1+itera
+    return params_update,cost_update
+    
