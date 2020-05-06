@@ -22,7 +22,8 @@ def cost_function(x,y):
     w0=np.mean(y)-(w1*np.mean(x))
     params=np.array([w0,w1])
     y_pred=np.dot(params,np.array([1,x]))
-    cost_function =sum((y_pred-y)**2)/(len(x)*2)
+    error=(y-y_pred)
+    cost_function =np.dot(error.T,error)/(len(x)*2)
     return cost_function
     
 #gradient_descent
@@ -35,7 +36,8 @@ def gradient_descent(x,y,params,alpha,iteration):
         gradient_store=np.zeros([2,m])
         for i in range(m):
             y_pred=np.dot(params,np.array([1.0,x]))
-            cost_function = np.sum((y_pred-y)**2)/(m*2)
+            error=(y-y_pred)
+            cost_function =np.dot(error.T,error)/(len(x)*2)
             cost_update[itera] = cost_function
             gradient=np.array([1.0,x[i]])*(y[i]-y_pred[i])
             gradient_store[:,i]=gradient
